@@ -1,7 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
+import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { Authcontext } from "../../Context/Usercontext";
 
 const Login = () => {
+  const { loginemail } = useContext(Authcontext);
+
+  const handelalls = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log({ email, password });
+    loginemail(email, password)
+      .then((res) => {
+        const user = res.user;
+        if(user.uid){
+          return toast.success('successfuly loge in !!')
+        }
+      })
+      .catch((e) => {
+        console.error(e.message);
+      });
+  };
   return (
     <div>
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 mx-auto my-5 bg-gray-900 text-gray-100">
@@ -12,67 +33,51 @@ const Login = () => {
           </p>
         </div>
         <form
-          novalidate=""
-          action=""
-          className="space-y-12 ng-untouched ng-pristine ng-valid"
+          onSubmit={handelalls}
+          className="space-y-6 ng-untouched ng-pristine ng-valid"
         >
-          <div className="space-y-4">
-            <div>
-              <label for="email" className="block mb-2 text-sm">
-                Email address
-              </label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="leroy@jenkins.com"
-                className="w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-100 text-gray-900"
-              />
-            </div>
-            <div>
-              <div className="flex justify-between mb-2">
-                <label for="password" className="text-sm">
-                  Password
-                </label>
-                <Link
-                  rel="noopener noreferrer"
-                  to="/"
-                  className="text-xs hover:underline text-gray-400"
-                >
-                  Forgot password?
-                </Link>
-              </div>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="*****"
-                className="w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-100 text-gray-900"
-              />
-            </div>
+          <div className="space-y-1 text-sm">
+            <label htmlFor="email" className="block text-gray-400">
+              Email
+            </label>
+            <input
+              required
+              type="email"
+              name="email"
+              id="email"
+              placeholder="rohit@gmail.com"
+              className="w-full px-4 py-3 rounded-md border-gray-700 bg-gray-100 text-gray-900 focus:border-violet-400"
+            />
           </div>
-          <div className="space-y-2">
-            <div>
-              <button
-                type="button"
-                className="w-full px-8 py-3 font-semibold rounded-md bg-violet-400 text-gray-900"
-              >
-                Sign in
-              </button>
-            </div>
-            <p className="px-6 text-sm text-center text-gray-400">
-              Don't have an account yet?
-              <Link
-                rel="noopener noreferrer"
-                to="/signup"
-                className="hover:underline text-violet-400"
-              >
-                Sign up
-              </Link>
-              .
-            </p>
+          <div className="space-y-1 text-sm">
+            <label htmlFor="password" className="block text-gray-400">
+              Password
+            </label>
+            <input
+              required
+              type="password"
+              name="password"
+              id="password"
+              placeholder="*****"
+              className="w-full px-4 py-3 rounded-md border-gray-700 bg-gray-100 text-gray-900 focus:border-violet-400"
+            />
           </div>
+
+          <button className="block w-full p-3 text-center rounded-sm text-gray-900 bg-violet-400">
+            Sign in
+          </button>
         </form>
+        <p className="px-6 mt-4 text-sm text-center text-gray-400">
+          Don't have an account yet?
+          <Link
+            rel="noopener noreferrer"
+            to="/signup"
+            className="hover:underline text-violet-400"
+          >
+            Sign up
+          </Link>
+          .
+        </p>
       </div>
     </div>
   );

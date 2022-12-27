@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+// import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCt-RnOnaJpptKDigIKh1OYNBZ7odz-rL4",
@@ -8,8 +8,10 @@ const firebaseConfig = {
   storageBucket: "social-inr.appspot.com",
   messagingSenderId: "769544044387",
   appId: "1:769544044387:web:bef3f01e2de3f474599d56",
-  measurementId: "G-005DXBGCWB",
+  // measurementId: "G-005DXBGCWB",
 };
 
 const app = initializeApp(firebaseConfig);
-export const analytics = getAnalytics(app);
+//  const analytics = getAnalytics(app);
+
+ export default app;
