@@ -21,7 +21,7 @@ const Navebar = () => {
       </div>
       <div>
         <NavLink
-          to="/"
+          to="/top"
           title="Top Rating"
           className={`btn btn-outline border-none text-3xl font-extrabold text-black ${({isActive}) => (isActive ? "text-blue-700" : undefined)}`}
         >
@@ -30,7 +30,7 @@ const Navebar = () => {
       </div>
       <div title="Top Rating">
         <NavLink
-          to="/"
+          to="/about"
           className={`btn btn-outline border-none text-3xl font-extrabold text-black ${({isActive}) => (isActive ? "text-blue-700" : undefined)}`}
         >
           <SiAboutdotme />
@@ -38,7 +38,7 @@ const Navebar = () => {
       </div>
       <div>
         <NavLink
-          to="/"
+          to="/profile"
           title="Profile"
           className={`btn btn-outline border-none text-3xl font-extrabold text-black ${({isActive}) => (isActive ? "text-blue-700" : undefined)}`}
         >
