@@ -1,4 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
+import Login from "../../Components/Authancition/Login";
+import Signup from "../../Components/Authancition/Signup";
 import About from "../../Components/MainPage/About/About";
 import Home from "../../Components/MainPage/Home/Home";
 import Profile from "../../Components/MainPage/Profile/Profile";
@@ -28,8 +30,16 @@ export const router = createBrowserRouter([
         element: <Profile />,
       },
       {
-        path: "//post-from",
+        path: "/post-from",
         element: <PostForm />,
+      },
+      {
+        path: "/login",
+        element: <Login/>,
+      },
+      {
+        path: "/signup",
+        element: <Signup/>,
       },
     ],
   },
