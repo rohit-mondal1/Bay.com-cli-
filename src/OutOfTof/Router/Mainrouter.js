@@ -3,6 +3,7 @@ import About from "../../Components/MainPage/About/About";
 import Home from "../../Components/MainPage/Home/Home";
 import Profile from "../../Components/MainPage/Profile/Profile";
 import Top from "../../Components/MainPage/TopRet/Top";
+import PostForm from "../../Components/Sheaird/PostForm";
 import Main from "../Layout/Main";
 
 export const router = createBrowserRouter([
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "//post-from",
+        element: <PostForm />,
       },
     ],
   },
