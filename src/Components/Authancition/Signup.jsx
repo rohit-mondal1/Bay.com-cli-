@@ -1,8 +1,10 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext} from "react";
+import {Link} from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { Authcontext } from "../../Context/Usercontext";
 import { updateProfile } from "firebase/auth";
+
+const apikey = "95ede757551f3afc03649eb34693d691";
 
 const Signup = () => {
   const { signupemail, auth } = useContext(Authcontext);
@@ -14,7 +16,14 @@ const Signup = () => {
     const email = form.email.value;
     const img = form.img;
     const password = form.password.value;
-    console.log({ username, email, img, password });
+    const location = form.location.value;
+    const image = img.files[0];
+
+    const formData = new FormData();
+    formData.append("image", image);
+    const url = `https://api.imgbb.com/1/upload?key=${apikey}`;
+
+   
 
     // sign up functions
 
@@ -25,7 +34,37 @@ const Signup = () => {
         if (user.uid) {
           updateProfile(auth.currentUser, {
             displayName: username,
-          }).then(() => {});
+            // photoURL: imgdata,
+          }).then(() => {
+          // img hosting
+            fetch(url, {
+              method: "POST",
+              body: formData,
+            })
+              .then((res) => res.json())
+              .then((imgdata) => {
+                const imgurl =(imgdata.data.url);
+                const useruplode = {
+                  naem: username,
+                  email,
+                  imgurl,
+                  location,
+                };
+                // post user data in db
+                fetch("http://localhost:8000/userss", {
+                  method: "POST",
+                  headers: {
+                    "content-type": "application/json",
+                  },
+                  body: JSON.stringify(useruplode),
+                })
+                  .then((res) => res.json())
+                  .then((data) => {
+                    console.log(data);
+                  });
+              });
+            
+          });
         }
       })
       .catch((e) => {
@@ -42,7 +81,7 @@ const Signup = () => {
         >
           <div className="space-y-1 text-sm">
             <label htmlFor="username" className="block text-gray-400">
-              Username
+              Username*
             </label>
             <input
               required
@@ -54,8 +93,19 @@ const Signup = () => {
             />
           </div>
           <div className="space-y-1 text-sm">
+            <label htmlFor="img" className="block text-gray-400">
+              Img*
+            </label>
+            <input
+              name="img"
+              required
+              type="file"
+              className="file-input w-full  "
+            />
+          </div>
+          <div className="space-y-1 text-sm">
             <label htmlFor="email" className="block text-gray-400">
-              Email
+              Email*
             </label>
             <input
               required
@@ -67,8 +117,22 @@ const Signup = () => {
             />
           </div>
           <div className="space-y-1 text-sm">
+            <label htmlFor="location" className="block text-gray-400">
+              Location*
+            </label>
+            <input
+              required
+              type="location"
+              name="location"
+              id="location"
+              placeholder="your location"
+              className="w-full px-4 py-3 rounded-md border-gray-700 bg-gray-100 text-gray-900 focus:border-violet-400"
+            />
+          </div>
+
+          <div className="space-y-1 text-sm">
             <label htmlFor="password" className="block text-gray-400">
-              Password
+              Password*
             </label>
             <input
               required
@@ -80,17 +144,6 @@ const Signup = () => {
             />
           </div>
 
-          <div className="space-y-1 text-sm">
-            <label htmlFor="img" className="block text-gray-400">
-              Img
-            </label>
-            <input
-              name="img"
-              required
-              type="file"
-              className="file-input w-full  "
-            />
-          </div>
           <button className="block w-full p-3 text-center rounded-sm text-gray-900 bg-violet-400">
             Sign in
           </button>
