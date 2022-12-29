@@ -5,7 +5,7 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
-  updateProfile,
+
 } from "firebase/auth";
 import app from "../OutOfTof/Firebase/Firebase";
 
@@ -14,15 +14,18 @@ const auth = getAuth(app);
 
 const UserContext = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loder, setLoder] = useState(true);
   const provider = new GoogleAuthProvider();
 
   //sign up email and password
   const signupemail = (email, password) => {
+    setLoder(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
-  
+
   //login email and password
   const loginemail = (email, password) => {
+    setLoder(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -30,12 +33,13 @@ const UserContext = ({ children }) => {
   useEffect(() => {
     const unsubmite = onAuthStateChanged(auth, (cruser) => {
       setUser(cruser);
+      setLoder(false)
     });
     return () => {
       unsubmite();
     };
   }, []);
-  let authinfo = { user, signupemail, loginemail, auth };
+  let authinfo = { user, signupemail, loginemail, auth , loder };
   return (
     <div>
       <Authcontext.Provider value={authinfo}>{children}</Authcontext.Provider>

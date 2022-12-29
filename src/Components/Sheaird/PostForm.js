@@ -14,21 +14,22 @@ const PostForm = () => {
           <h1>name</h1>
         </div>
       </Link>
-      <div>
-        <input
-          type="text"
+      <form>
+        <textarea
+          name="text"
+          style={{ resize: "none", overflow: "hidden" }}
           placeholder="What's on your mind ?"
           className="input input-bordered input-lg w-full  border-none mt-3 mb-2 h-32"
-        />
-      </div>
+        ></textarea>
 
-      <div>
         <input
           type="file"
+          name="file"
           className="file-input file-input-bordered file-input-lg w-full  "
         />
-      </div>
-      <button className="btn w-full btn-primary my-3">Post</button>
+
+        <button className="btn w-full btn-primary my-3">Post</button>
+      </form>
     </div>
   );
 };

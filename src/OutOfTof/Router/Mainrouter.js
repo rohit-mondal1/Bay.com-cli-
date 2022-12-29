@@ -7,11 +7,12 @@ import Profile from "../../Components/MainPage/Profile/Profile";
 import Top from "../../Components/MainPage/TopRet/Top";
 import PostForm from "../../Components/Sheaird/PostForm";
 import Main from "../Layout/Main";
+import Protect from "../ProtectsFile/Protect";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Main />,
+    element: <Protect> <Main /></Protect> ,
     children: [
       {
         path: "/",

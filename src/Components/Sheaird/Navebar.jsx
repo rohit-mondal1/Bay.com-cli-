@@ -10,7 +10,7 @@ const Navebar = () => {
     <div className="flex justify-between p-3 bg-slate-200 text-black">
       <div>
         <NavLink
-          to="/home"
+          to="/"
           title="Home"
           className={`btn btn-outline border-none text-3xl font-extrabold text-black ${({
             isActive,
