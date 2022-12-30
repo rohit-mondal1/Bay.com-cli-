@@ -1,0 +1,17 @@
+
+@media only screen and (min-width:350px) and (max-width:599px) {
+    #imgss{
+        
+        width: 100vw;
+    }}
+@media only screen and (min-width:599px) and (max-width:19000px) {
+    #imgss{
+        
+        width: 580px;
+    }
+    #minetext{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+}

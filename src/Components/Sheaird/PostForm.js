@@ -6,11 +6,11 @@ import { Authcontext } from "../../Context/Usercontext";
 const apikey = "95ede757551f3afc03649eb34693d691";
 
 const PostForm = () => {
+  const { userdata } = useContext(Authcontext);
   const navegate = useNavigate();
 const dat = new Date();
 const date = format(dat, 'PP');
 
-  const { userdata } = useContext(Authcontext);
   const handelpostSubmite = (e) => {
     e.preventDefault();
     const form = e.target;

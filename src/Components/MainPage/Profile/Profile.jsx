@@ -9,17 +9,15 @@ const Profile = () => {
   const { user , userdata } = useContext(Authcontext);
   const [post, setPost] = useState("");
 
-  
+  console.log("object", post);
 
-    useEffect(()=>{
-      fetch(`http://localhost:8000/posts?email=${user?.email}`)
+  useEffect(() => {
+    fetch(`http://localhost:8000/posts?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setPost(data);
       });
-    },[user?.email])
-
-
+  }, [user?.email]);
 
   return (
     <div>
@@ -70,11 +68,10 @@ const Profile = () => {
         <PostBar />
       </div>
       {/* my all post  */}
-      <div className="bg-black/10">
-        {post?.map((p) => (
-          <MypostCart key={p._id} kk={p}></MypostCart>
-        ))}
-      </div>
+
+      {post?.length ? (
+        <div className="bg-black/10">{post.map((ap) => <MypostCart key={ap._id}  kk={ap}></MypostCart>)}</div>
+      ) : undefined}
     </div>
   );
 };
