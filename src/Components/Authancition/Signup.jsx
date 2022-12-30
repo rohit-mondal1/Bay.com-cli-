@@ -1,5 +1,5 @@
 import React, { useContext} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { Authcontext } from "../../Context/Usercontext";
 import { updateProfile } from "firebase/auth";
@@ -8,6 +8,7 @@ const apikey = "95ede757551f3afc03649eb34693d691";
 
 const Signup = () => {
   const { signupemail, auth } = useContext(Authcontext);
+  const navegate = useNavigate()
 
   const handelall = (e) => {
     e.preventDefault();
@@ -60,6 +61,7 @@ const Signup = () => {
                 })
                   .then((res) => res.json())
                   .then((data) => {
+                    navegate('/')
                     console.log(data);
                   });
               });

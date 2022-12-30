@@ -1,20 +1,74 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { format } from "date-fns";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Authcontext } from "../../Context/Usercontext";
+
+const apikey = "95ede757551f3afc03649eb34693d691";
 
 const PostForm = () => {
+  const navegate = useNavigate();
+const dat = new Date();
+const date = format(dat, 'PP');
+
+  const { userdata } = useContext(Authcontext);
+  const handelpostSubmite = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const text = form.text.value;
+    const img = form.file.files[0];
+
+    const formData = new FormData();
+    formData.append("image", img);
+    const url = `https://api.imgbb.com/1/upload?key=${apikey}`;
+
+    // img hosting
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgdata) => {
+        const imgurl = imgdata.data.url;
+        const postuplode = {
+          imgurl,
+          text,
+          email: userdata?.email,
+          date,
+         img: userdata?.imgurl,
+         name: userdata?.naem,
+         like:0
+        };
+        console.log("postuplode", postuplode);
+        // post user data in db
+        fetch("http://localhost:8000/posts", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(postuplode),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            navegate("/");
+            console.log(data);
+          });
+      });
+
+    console.log({ text, img });
+  };
   return (
     <div className="bg-black/10  px-14 my-3 py-3 ">
       <Link to="/profile">
         <div className="flex gap-3 items-center ">
           <div className="avatar">
             <div className="w-14 rounded-full">
-              <img src="https://placeimg.com/192/192/people" alt="" />
+              <img src={userdata?.imgurl} alt="" />
             </div>
           </div>
-          <h1>name</h1>
+          <h1 className="font-semibold text-xl">{userdata?.naem}</h1>
         </div>
       </Link>
-      <form>
+      <form onSubmit={handelpostSubmite}>
         <textarea
           name="text"
           style={{ resize: "none", overflow: "hidden" }}
@@ -25,7 +79,7 @@ const PostForm = () => {
         <input
           type="file"
           name="file"
-          className="file-input file-input-bordered file-input-lg w-full  "
+          className="file-input file-input-bordered file-input-lg w-full"
         />
 
         <button className="btn w-full btn-primary my-3">Post</button>

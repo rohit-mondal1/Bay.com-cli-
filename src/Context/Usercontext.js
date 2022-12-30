@@ -16,6 +16,7 @@ const UserContext = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loder, setLoder] = useState(true);
   const provider = new GoogleAuthProvider();
+  const [userdata, setUserdata] = useState(null);
 
   //sign up email and password
   const signupemail = (email, password) => {
@@ -33,13 +34,22 @@ const UserContext = ({ children }) => {
   useEffect(() => {
     const unsubmite = onAuthStateChanged(auth, (cruser) => {
       setUser(cruser);
-      setLoder(false)
+      setLoder(false);
     });
     return () => {
       unsubmite();
     };
   }, []);
-  let authinfo = { user, signupemail, loginemail, auth , loder };
+
+  useEffect(() => {
+    fetch(`http://localhost:8000/user?email=${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setUserdata(data);
+      });
+  }, [user?.email]);
+
+  let authinfo = { user, signupemail, loginemail, auth, loder, userdata };
   return (
     <div>
       <Authcontext.Provider value={authinfo}>{children}</Authcontext.Provider>
