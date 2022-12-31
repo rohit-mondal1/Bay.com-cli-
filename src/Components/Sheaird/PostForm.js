@@ -8,8 +8,6 @@ const apikey = "95ede757551f3afc03649eb34693d691";
 const PostForm = () => {
   const { userdata } = useContext(Authcontext);
   const navegate = useNavigate();
-const dat = new Date();
-const date = format(dat, 'PP');
 
   const handelpostSubmite = (e) => {
     e.preventDefault();
@@ -33,7 +31,7 @@ const date = format(dat, 'PP');
           imgurl,
           text,
           email: userdata?.email,
-          date,
+          date:new Date(),
          img: userdata?.imgurl,
          name: userdata?.naem,
          like:0
