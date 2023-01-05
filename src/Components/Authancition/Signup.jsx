@@ -31,7 +31,6 @@ const Signup = () => {
     signupemail(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
         if (user.uid) {
           updateProfile(auth.currentUser, {
             displayName: username,
@@ -62,7 +61,6 @@ const Signup = () => {
                   .then((res) => res.json())
                   .then((data) => {
                     navegate('/')
-                    console.log(data);
                   });
               });
             
@@ -70,7 +68,6 @@ const Signup = () => {
         }
       })
       .catch((e) => {
-        console.log(e);
       });
   };
   return (

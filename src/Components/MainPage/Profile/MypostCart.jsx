@@ -1,19 +1,60 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./mypost.css";
 import { BiCommentDetail, BiLike, BiShareAlt } from "react-icons/bi";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { format } from "date-fns";
+
 import { Link } from "react-router-dom";
+import { Authcontext } from "../../../Context/Usercontext";
 
 const MypostCart = ({ kk }) => {
-  const { imgurl, text, name, img, date } = kk;
+  const { user } = useContext(Authcontext);
+  const { imgurl, text, name, img, date, _id, like: likes } = kk;
   const [like, setLike] = useState(false);
-  // const dat = format(date, 'PP');
+  const [id, setid] = useState("");
+  const email = user.email;
 
-  console.log(like);
-  //  const handellike=()=>{
+  for (const slike of likes) {
+    console.log(slike);
 
-  //  }
+    // if (slike == email) {
+    //   setLike(true);
+    // }
+    // else{
+    //   setLike(false);
+    // }
+  }
+ 
+
+  if (like) {
+    fetch(`http://localhost:8000/like/${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }
+  //  else if (!like) {
+  //   fetch(`http://localhost:8000//${id}`, {
+  //     method: "PUT",
+  //     headers: {
+  //       "content-type": "application/json",
+  //     },
+  //     body: JSON.stringify(user.email),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //     });
+  // }
+
+  const handellike = (id) => {
+    setid(id);
+  };
 
   return (
     <div>
@@ -46,18 +87,24 @@ const MypostCart = ({ kk }) => {
             <img src={imgurl} alt="" />
           </div>
         </div>
+        <div>
+          <h1 className=" px-8 mb-[-10px]">{likes?.length}</h1>
+        </div>
         {/* lole and comment and sheair */}
         <div className="flex justify-between  w-full font-bold text-3xl mt-4 px-6 ">
           {like ? (
-            <div className="text-blue-700" onClick={() => setLike(!like)}>
+            <div
+              className="text-red-700"
+              onClick={() => handellike(_id, setLike(!like))}
+            >
               <BiLike />
             </div>
           ) : (
-            <div onClick={() => setLike(!like)}>
+            <div onClick={() => handellike(_id, setLike(!like))}>
               <BiLike />
             </div>
           )}
-          {/* <div onClick={()=>setLike(!like)}><BiLike/></div> */}
+          {/* <div ><BiLike/></div> */}
           <div>
             <BiCommentDetail />
           </div>

@@ -5,7 +5,6 @@ import PostBar from "../../Sheaird/PostBar";
 
 const Home = () => {
   const { user } = useContext(Authcontext);
-  console.log(user);
 
   return (
     <div>

@@ -15,6 +15,8 @@ const PostForm = () => {
     const text = form.text.value;
     const img = form.file.files[0];
 
+    const dat = format(new Date(), 'PP');
+
     const formData = new FormData();
     formData.append("image", img);
     const url = `https://api.imgbb.com/1/upload?key=${apikey}`;
@@ -31,12 +33,11 @@ const PostForm = () => {
           imgurl,
           text,
           email: userdata?.email,
-          date:new Date(),
+          date:dat,
          img: userdata?.imgurl,
          name: userdata?.naem,
-         like:0
+         like:[]
         };
-        console.log("postuplode", postuplode);
         // post user data in db
         fetch("http://localhost:8000/posts", {
           method: "POST",
@@ -48,11 +49,10 @@ const PostForm = () => {
           .then((res) => res.json())
           .then((data) => {
             navegate("/");
-            console.log(data);
+         
           });
       });
 
-    console.log({ text, img });
   };
   return (
     <div className="bg-black/10  px-14 my-3 py-3 ">

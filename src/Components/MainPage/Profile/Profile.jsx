@@ -9,7 +9,6 @@ const Profile = () => {
   const { user , userdata } = useContext(Authcontext);
   const [post, setPost] = useState("");
 
-  console.log("object", post);
 
   useEffect(() => {
     fetch(`http://localhost:8000/posts?email=${user?.email}`)
