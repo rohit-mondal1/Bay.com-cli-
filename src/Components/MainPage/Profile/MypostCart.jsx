@@ -10,19 +10,39 @@ const MypostCart = ({ kk }) => {
   const { user } = useContext(Authcontext);
   const { imgurl, text, name, img, date, _id, like: likes } = kk;
   const [like, setLike] = useState(false);
+  const [relike, setReLike] = useState(false);
   const [id, setid] = useState("");
+
   const email = user.email;
 
-  for (const slike of likes) {
-    console.log(slike);
+  // const aaaa = likes.find(a => setReLike('a'))
 
-    // if (slike == email) {
-    //   setLike(true);
-    // }
-    // else{
-    //   setLike(false);
-    // }
-  }
+
+
+
+  // for (const aa of likes) {
+  //   console.log(aa);
+  //   if (aa === email) {
+  //     console.log('object');
+       
+  //      break
+  //   }else(console.log('2222222'))
+      
+  // }
+
+  console.log('relike', relike);
+
+//  for(let i = 0; i < likes.length; i++ ){
+//   let element = likes[i];
+//   console.log('element' , element);
+//   // if (element === email) {
+//   //     setLike(true);
+//   //   }
+//   //   else{
+//   //     setLike(false);
+//   //   }
+//  }
+
  
 
   if (like) {
@@ -92,6 +112,10 @@ const MypostCart = ({ kk }) => {
         </div>
         {/* lole and comment and sheair */}
         <div className="flex justify-between  w-full font-bold text-3xl mt-4 px-6 ">
+
+
+
+
           {like ? (
             <div
               className="text-red-700"
