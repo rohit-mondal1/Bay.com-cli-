@@ -2,20 +2,21 @@ import React, { useContext, useEffect, useState } from "react";
 import { Authcontext } from "../../../Context/Usercontext";
 
 import PostBar from "../../Sheaird/PostBar";
-import HomeCart from "./HomeCart";
+import Allpostcart from "./Allpostcart";
+
 
 const Home = () => {
   const { user } = useContext(Authcontext);
-  const [post, setPost] = useState("");
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:8000/allpost`)
       .then((res) => res.json())
       .then((data) => {
-        setPost(data);
+        setPosts(data);
       });
   }, []);
-  console.log(post);
+  console.log(posts);
 
   return (
     <div>
@@ -24,11 +25,9 @@ const Home = () => {
 
       <div>
      
-        {/* <div className="bg-black/10">{post.map((ap) => <HomeCart key={ap._id}  kk={ap}></HomeCart>)}</div> */}
-
-        {
-          // post.localeCompare(a => <HomeCart key={a._id} b={a}></HomeCart>)
-        }
+      {posts?.length ? (
+        <div className="bg-black/10">{posts.map((ap) => <Allpostcart key={ap._id}  kk={ap}></Allpostcart>)}</div>
+      ) : undefined}
       
       
       </div>

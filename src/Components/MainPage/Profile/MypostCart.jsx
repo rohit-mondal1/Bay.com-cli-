@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./mypost.css";
 import { BiCommentDetail, BiLike, BiShareAlt } from "react-icons/bi";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -10,39 +10,21 @@ const MypostCart = ({ kk }) => {
   const { user } = useContext(Authcontext);
   const { imgurl, text, name, img, date, _id, like: likes } = kk;
   const [like, setLike] = useState(false);
-  const [relike, setReLike] = useState(false);
+
   const [id, setid] = useState("");
 
   const email = user.email;
 
-  // const aaaa = likes.find(a => setReLike('a'))
+  useEffect(()=>{
+    const aaaa = likes.find(a => a=== email)
+    if(aaaa){
+      setLike(true)
+    }
+  },[likes , email])
 
+ 
 
-
-
-  // for (const aa of likes) {
-  //   console.log(aa);
-  //   if (aa === email) {
-  //     console.log('object');
-       
-  //      break
-  //   }else(console.log('2222222'))
-      
-  // }
-
-  console.log('relike', relike);
-
-//  for(let i = 0; i < likes.length; i++ ){
-//   let element = likes[i];
-//   console.log('element' , element);
-//   // if (element === email) {
-//   //     setLike(true);
-//   //   }
-//   //   else{
-//   //     setLike(false);
-//   //   }
-//  }
-
+  
  
 
   if (like) {
