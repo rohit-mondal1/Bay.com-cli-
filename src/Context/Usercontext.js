@@ -5,6 +5,7 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut,
 
 } from "firebase/auth";
 import app from "../OutOfTof/Firebase/Firebase";
@@ -49,7 +50,12 @@ const UserContext = ({ children }) => {
       });
   }, [user?.email]);
 
-  let authinfo = { user, signupemail, loginemail, auth, loder, userdata };
+  // log out account
+  const logout =()=>{
+    signOut(auth)
+  }
+
+  let authinfo = { user, signupemail, loginemail, auth, loder, userdata , logout };
   return (
     <div>
       <Authcontext.Provider value={authinfo}>{children}</Authcontext.Provider>

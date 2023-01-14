@@ -37,7 +37,7 @@ const MypostCart = ({ kk }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        
       });
   }
   //  else if (!like) {
@@ -50,7 +50,7 @@ const MypostCart = ({ kk }) => {
   //   })
   //     .then((res) => res.json())
   //     .then((data) => {
-  //       console.log(data);
+  //       
   //     });
   // }
 

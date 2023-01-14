@@ -5,12 +5,16 @@ import Navebar from "../../Components/Sheaird/Navebar";
 
 const Main = () => {
   return (
-    <div>
-      <Navebar />
-      <div className="min-h-[90vh]">
-        <Outlet></Outlet>
+    <div className='relative'>
+      <div className="fixed top-0 left-0 right-0 z-40" >
+        <Navebar />
       </div>
-      <Footer />
+      <div className="mt-24">
+        <div className="min-h-[90vh]">
+          <Outlet></Outlet>
+        </div>
+        <Footer />
+      </div>
     </div>
   );
 };

@@ -35,12 +35,12 @@ const Allpostcart = ({kk}) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+       
         });
     }
     //  else if (!like) {
-    //   fetch(`http://localhost:8000//${id}`, {
-    //     method: "PUT",
+    //   fetch(`http://localhost:8000/deletelike/${id}`, {
+    //     method: "DELETE",
     //     headers: {
     //       "content-type": "application/json",
     //     },
@@ -48,7 +48,7 @@ const Allpostcart = ({kk}) => {
     //   })
     //     .then((res) => res.json())
     //     .then((data) => {
-    //       console.log(data);
+    //    
     //     });
     // }
   
@@ -70,11 +70,7 @@ const Allpostcart = ({kk}) => {
                 <h1 className="text-xs">{date}</h1>
               </div>
             </div>
-            <Link to="/">
-              <div className="mr-2">
-                <BsThreeDotsVertical />
-              </div>
-            </Link>
+          
           </div>
   
           <div className="py-3 mx-2">

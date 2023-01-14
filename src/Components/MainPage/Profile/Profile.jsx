@@ -6,7 +6,7 @@ import { Authcontext } from "../../../Context/Usercontext";
 import MypostCart from "./MypostCart";
 
 const Profile = () => {
-  const { user , userdata } = useContext(Authcontext);
+  const { user , userdata , logout} = useContext(Authcontext);
   const [post, setPost] = useState("");
 
 
@@ -17,6 +17,15 @@ const Profile = () => {
         setPost(data);
       });
   }, [user?.email]);
+
+
+  const handellogeout=()=>{
+    const confrem = window.confirm('Are you rade!');
+
+    if(confrem){
+      logout()
+    }
+  }
 
   return (
     <div>
@@ -61,6 +70,10 @@ const Profile = () => {
             </p>
           </div>
         </div>
+      </div>
+
+      <div className="w-4/5 mx-auto">
+      <button onClick={handellogeout} className="btn btn-outline btn-secondary w-full mx-auto btn-active">Loge out</button>
       </div>
 
       <div>

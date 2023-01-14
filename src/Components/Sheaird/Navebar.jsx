@@ -7,7 +7,9 @@ import { CgProfile } from "react-icons/cg";
 
 const Navebar = () => {
   return (
-    <div className="flex justify-between p-3 bg-slate-200 text-black">
+    <div className="flex justify-between p-3 bg-slate-200 text-black max-w-[600px] mx-auto border">
+
+      
       <div>
         <NavLink
           to="/"

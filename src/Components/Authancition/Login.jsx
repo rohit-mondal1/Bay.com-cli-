@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import { toast } from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Authcontext } from "../../Context/Usercontext";
 
 const Login = () => {
   const { loginemail } = useContext(Authcontext);
+  const navegate = useNavigate()
 
   const handelalls = (e) => {
     e.preventDefault();
@@ -15,6 +16,7 @@ const Login = () => {
       .then((res) => {
         const user = res.user;
         if(user.uid){
+          navegate('/')
           return toast.success('successfuly loge in !!')
         }
       })

@@ -16,7 +16,7 @@ const Home = () => {
         setPosts(data);
       });
   }, []);
-  console.log(posts);
+  
 
   return (
     <div>
